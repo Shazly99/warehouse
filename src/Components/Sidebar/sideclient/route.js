@@ -10,11 +10,32 @@ const routes = [
         path: "/client/productsCatalog",
         name: "Products Catalog",
         icon: <Icons.shop size={20} />,
+
     },
     {
         path: "/client/productList",
         name: "My Product List",
         icon: <Icons.list size={20} />,
+        subRoutes: [
+            {
+                path: "/client/productList/",
+                name: "List 1",
+                icon: <Icons.dote size={20} />,
+            },
+            {
+                path: "/client/productList/",
+                name: "List 2",
+                icon: <Icons.dote size={20}  />,
+            }, 
+            {
+                // path: "/client/reports/orders",
+                name: "Create new list",
+                icon: <Icons.dote size={20} />,
+                model:true
+            },
+
+        ]
+            
     },
     {
         path: "/client/orders",
@@ -41,6 +62,7 @@ const routes = [
                 name: "Top products",
                 icon: <Icons.dote size={20}  />,
             },
+            
             
         ],
     },

@@ -1,1 +1,92 @@
 @import '../../../style/varibale';
+
+.table-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px !important;
+.table-btn-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table-btn-right{
+    display: flex;
+    gap: 3px;
+ 
+    label{
+        font-family: 'Poppins';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 27px;
+/* identical to box height */
+
+
+        color: $colorRed-0;
+    }
+}
+    a {
+        text-decoration: none !important;
+
+        button {
+            /* Main color */
+            width: 279px !important;
+            height: 50px !important;
+            border-radius: 5px;
+        }
+    }
+}
+
+.app__profile-mode1 {
+
+    h5 {
+        color: $colorRed-0;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 29px;
+        line-height: 47px;
+        /* identical to box height */
+        text-align: center;
+    }
+
+    p {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* Black */
+
+        color: #000000;
+    }
+    .modal-header .btn-close {
+        margin-top: -60px !important; 
+        width: 12px !important;
+        height: 12px !important;
+    }
+    .app__profile_btn {
+        >button {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 27px;
+            /* identical to box height */
+            height: 50px;
+            width: 233px;
+        }
+    }
+}
+
+.modal-footer {
+    border-top: transparent !important
+}
+
+.modal-header {
+    border-bottom: transparent !important
+}

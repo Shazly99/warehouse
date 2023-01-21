@@ -5,10 +5,7 @@ import '../Sidebar.scss'
 import img from '../../../assets/Img'
 import routes from './route.js';
 import { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
-import { Tooltip as ReactTooltip } from 'react-tooltip'
-import { icons } from 'react-icons';
-import Icons from "../../../constants/Icons";
+import { FaBars } from 'react-icons/fa'; 
 import SidebarMenu from './SidebarMenu';
 
 
@@ -40,17 +37,16 @@ const SideClient = () => {
       <div className="main-container ">
         <motion.div
           animate={{
-            width: isOpen ? "300px" : "50px",
+            width: isOpen ? "300px" : "90px",
             transition: {
               duration: 0.5,
               type: "spring",
               damping: 10,
             },
           }}
-          className={`sidebar  `}
+          className={`sidebar`}
         >
-          <div className="side ">
-
+          <div className="side  ">
             <div className="top_section  ">
               <AnimatePresence>
                 {isOpen&& (
@@ -77,6 +73,7 @@ const SideClient = () => {
               if (route.subRoutes) {
                 return (
                   <SidebarMenu
+                  key={index}
                     setIsOpen={setIsOpen}
                     route={route}
                     showAnimation={showAnimation}

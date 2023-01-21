@@ -14,18 +14,15 @@ function App() {
             { path: 'addProduct', element: <Component.AddProducts /> },
           ]
         },
-
         {
           path: '/venderOrder', element: <Component.Orders />
         },
-
         {
           path: '/venderSubuser', children: [
             { index: true, element: <Component.SubUsers /> },
             { path: 'addUser', element: <Component.AddUser /> },
           ]
         },
-
         { path: '/venderProfile', element: <Component.Profile /> },
       ],
     },
@@ -44,7 +41,6 @@ function App() {
           ]
         },
         { path: 'profile', element: <Component.ProfileClient /> },
-
       ]
     }
   ])

@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Component from '../../../constants/Component';
 import { Col, FloatingLabel, Modal, Row } from 'react-bootstrap';
-import './Profile.scss'
-import { Button } from 'react-bootstrap/';
+import './Profile.scss' 
 
 function Profile() {
   const [show, setShow] = useState(false);
@@ -75,7 +74,7 @@ function Profile() {
           <a className='app__profile-model-a' onClick={handleShow}>
             Change Password
           </a>
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
               <Modal.Title className=' w-100 text-center' >Change Password</Modal.Title>
             </Modal.Header>

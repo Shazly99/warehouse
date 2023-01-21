@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Component from '../../../constants/Component'
 import './Dashboard.scss'
-function Dashboard() {
-  
+function Dashboard( ) {  
+
   return (
     <>
       <Container fluid>
         <div className="app__dashboard">
           <div className="app__dashboard_summary">
-            <Component.Summary />
+            <Component.Summary  />
           </div>
 
           <div className="app__dashboard_chart"  >
@@ -17,7 +17,7 @@ function Dashboard() {
               <Component.ChartLine />
             </Container>
           </div>
-          
+
           <div className="app__dashboard_chart"  >
             <Container >
               <Component.ChartColumn />

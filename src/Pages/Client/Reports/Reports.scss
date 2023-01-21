@@ -1,1 +1,27 @@
 @import '../../../style/varibale';
+
+.app__orders__search {
+    // gap: 10px ;
+    padding: 10px 0;
+    justify-content: space-between;
+    input,
+    textarea,
+    select,
+    option {
+        background: #F5F5F5 !important;
+        color: $colorRed-0 !important;
+        height: 50px !important;
+        border: none !important;
+        border-radius: 12px !important;
+        width: 100% !important;
+        :focus{
+            border: none !important;
+            outline: none !important;
+        }
+    }
+
+    .btn-search {  
+        height: 50px !important;
+        width: 100% !important;
+    }
+}

@@ -1,6 +1,5 @@
 import React from 'react';
-// import { useState, useEffect } from "react";
-import { Col, FloatingLabel, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
