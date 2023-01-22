@@ -6,7 +6,7 @@ import './ProductsList.scss'
 import data from './data';
 import Icons from '../../../constants/Icons';
 import Component from '../../../constants/Component';
-import Img from '../../../assets/Img'; 
+import Img from '../../../assets/Img';
 
 const ProductsList = () => {
   const [show, setShow] = useState(false);
@@ -24,8 +24,7 @@ const ProductsList = () => {
     setSelectedRows(prevRows => {
 
       if (prevRows.includes(row)) {
-        console.log(selectedRows);
-
+        console.log(selectedRows); 
         return prevRows.filter(item => item !== row);
       }
       else {
@@ -95,19 +94,18 @@ const ProductsList = () => {
                 <Modal.Body className='d-flex justify-content-center gap-3 app__profile_btn '>
                   <Button onClick={handleClosedetete} variant='danger'>Cancel</Button>
                   <Button variant='outline-danger'>Delete</Button>
-
                 </Modal.Body>
               </Modal>
             </div>
           </div>
-          <div className="table-btn-right ">
-       
-            {/* <Form.Check
+          <div className="table-btn-right px-4">
+
+            <Form.Check
               type={'checkbox'}  
               className="btn-danger mt-2"
               label={`Select All`}
               onClick={handleSelectAllClick}
-            />  */}
+            />  
 
           </div>
 
@@ -137,7 +135,7 @@ const ProductsList = () => {
                         reverse
                         type={'checkbox'}
                         defaultChecked={true}
-                        // checked={selectedRows?.includes(item)}
+                      checked={selectedRows?.includes(item)}
                       />
                     </td>
                     <td >

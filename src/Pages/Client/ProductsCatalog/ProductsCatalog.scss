@@ -1,1 +1,107 @@
 @import '../../../style/varibale';
+
+.app__catalog {
+    overflow: hidden;
+    .app__catalog-left {
+        background: #F9F9F9;
+
+        padding-top: 10px;
+        padding-left: 25px;
+        height: calc(100vh - 58.28px);
+
+        h4 {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 38px;
+            /* identical to box height */
+            /* Dark Gray */
+            color: #4A4A4A;
+        }
+    }
+
+    .app__catalog-right {
+        .app__catalog-right-header {
+            box-shadow: $shadow !important;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .lable_selectapp {
+                /* Button */
+
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400 !important;
+                font-size: 18px !important;
+                line-height: 27px !important;
+                /* identical to box height */
+                color: $colorRed-0 ;
+
+            }
+        }
+
+        .app__catalog-right-product {
+        height: 602px !important;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            h2 {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 27px;
+                color: #000000;
+
+            }
+
+            .item { 
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                .item1 {
+                    display: flex;
+                    gap: 4px;
+
+                    label {
+                        font-family: 'Poppins';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 24px;
+                        /* identical to box height */
+
+
+                        /* Dark Gray */
+
+                        color: #4A4A4A;
+
+                    }
+
+                    span {
+                        font-family: 'Poppins';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 24px;
+                        /* identical to box height */
+
+
+                        /* Black */
+
+                        color: #000000;
+
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.app__catalog .app__catalog-left span {
+    color: $colorRed-0 !important;
+}
