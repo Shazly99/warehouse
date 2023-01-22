@@ -24,11 +24,9 @@ const ProductsList = () => {
     setSelectedRows(prevRows => {
 
       if (prevRows.includes(row)) {
-        console.log(selectedRows); 
         return prevRows.filter(item => item !== row);
       }
       else {
-        console.log(selectedRows);
         return [...prevRows, row];
       }
     });
@@ -115,9 +113,7 @@ const ProductsList = () => {
           <Table striped responsive={true} className='rounded-3 '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                <th className=' d-flex justify-content-center align-item-center  border-none ' style={{ borderColor: "transparent" }}>
-
-                </th>
+                <th className=' d-flex justify-content-center align-item-center  border-none ' style={{ borderColor: "transparent" }}>  </th>
                 <th>Product Image</th>
                 <th>Product Name</th>
                 <th>Product Category</th>
@@ -135,7 +131,7 @@ const ProductsList = () => {
                         reverse
                         type={'checkbox'}
                         defaultChecked={true}
-                      checked={selectedRows?.includes(item)}
+                        checked={selectedRows?.includes(item)}
                       />
                     </td>
                     <td >

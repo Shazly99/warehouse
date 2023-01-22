@@ -3,7 +3,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, FormCheck, Form } from 'react-bootstrap';
 import './ProductsCatalog.scss'
 import Component from "../../../constants/Component";
 import Icons from '../../../constants/Icons';
@@ -12,50 +12,45 @@ import Checkbox from '@mui/material/Checkbox';
 import Img from '../../../assets/Img';
 import { Typography } from '@mui/material';
 
+let data = [
+  { id: 1, img: Img.img1, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+  { id: 2, img: Img.img2, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+  { id: 3, img: Img.img3, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+  { id: 4, img: Img.img4, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+  { id: 5, img: Img.img5, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+  { id: 6, img: Img.img6, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
+]
 const ProductsCatalog = () => {
   const [value, setValue] = useState('Categories1');
+
 
   const handleChange = (event) => {
     setValue(event.target.value);
     console.log(event.target.value);
-  };
-  // const [checked, setChecked] = React.useState([true , false]);
+  }; 
+  const [selectedRows, setSelectedRows] = useState([]);
+  const rows = data;
 
-  const handleChange1 = (event) => {
-    setChecked([event.target.checked, event.target.checked]);
-    console.log();
-  };
+   const handleRowClick = (row) => {
+     setSelectedRows(prevRows => {
 
-  const handleChange2 = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-    console.log(event.target.checked);
-  };
+       if (prevRows?.includes(row)) {
+         return prevRows.filter(item => item !== row);
+       }
+       else {
+         return [...prevRows, row];
+       }
+     });
+   }
 
-  const handleChange3 = (event) => {
-    setChecked([checked[0], event.target.checked]);
-  };
-  const [checked, setChecked] = React.useState(false);
-
-  const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-      <FormControlLabel
-        label="Child 1"
-        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-      />
-      <FormControlLabel
-        label="Child 2"
-        control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-      />
-    </Box>
-  );
-  let data = [
-    { id: 1, img: Img.img1, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-    { id: 2, img: Img.img2, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-    { id: 3, img: Img.img3, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-    { id: 4, img: Img.img4, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-    { id: 5, img: Img.img5, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-    { id: 6, img: Img.img6, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
-  ]
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      // select all rows
+      setSelectedRows(rows);
+    } else {
+      setSelectedRows([]);
+    }
+  }
   return (
     <>
       <div className="app__catalog">
@@ -101,27 +96,22 @@ const ProductsCatalog = () => {
           <Col xl={10} lg={10} md={10} sm={11} className="app__catalog-right">
             <div className="app__catalog-right-header">
               <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />} />
-              <div>
-
-                <FormControlLabel
-                  label="Select All"
-                  className='lable_selectapp'
-                  control={
-                    <Checkbox
-                      indeterminate={true}
-                      onChange={() => setChecked(!checked)}
-                    />
-                  }
+                  
+              <div className=' px-4'  onClick={handleSelectAllClick}>
+                <Form.Check
+                  type={'checkbox'}
+                  className="btn-danger mt-2"
+                  label={`Select All`}
+                  
                 />
-
               </div>
             </div>
             <div className="app__catalog-right-product  px-2">
               <Row>
                 {
                   data.map((item, index) => (
-                    <Col xl={4} lg={4} md={6} sm={12} className=" mt-2">
-                      <img src={item.img} className='w-100' alt="" srcset="" />
+                    <Col key={index} xl={4} lg={4} md={6} sm={12} className=" mt-4" onClick={() => handleRowClick(item)}>
+                      <img src={item.img} className='w-100' alt="" />
                       <h2>{item.title}</h2>
                       <div className="item">
                         <div className="item1">
@@ -140,27 +130,21 @@ const ProductsCatalog = () => {
                           <label htmlFor="">No. of sales :</label>
                           <span>{item.Nosales}</span>
                         </div>
-                        <FormControlLabel
-                          control={
-
-                            <Checkbox
-                              checked={checked}
-                              onChange={() => setChecked(!checked)}
-                              defaultIndeterminate={true}
-                            />
-                          }
-                          label={<Typography style={{ color: '#BF1E30' }}>Add To My List</Typography>}
+                        
+                        <FormCheck
+                        className='checkbox-content'
+                          reverse
+                          label='Add To My List'
+                          type={'checkbox'}
+                          defaultChecked={true}
+                           checked={selectedRows?.includes(item)}
                         />
-                        {/*
-                        <FormControlLabel
-                          label="Add To My List"
-                          control={<Checkbox checked={checked[index]} onChange={handleChange2} />}
 
-                        /> */}
                       </div>
                     </Col>
                   ))
                 }
+
               </Row>
             </div>
           </Col>

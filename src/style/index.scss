@@ -1,5 +1,5 @@
 @import '../style/varibale';
- 
+
 body {
   background: $colorLight;
 }
@@ -23,4 +23,12 @@ body {
 
 ::-webkit-scrollbar-corner {
   background-color: black;
- }
+}
+
+
+input[type=checkbox] {
+  accent-color: $colorRed-0 !important;
+  border-color: rgba($color: $colorRed-0, $alpha: 0.8);
+  width: 20px !important;
+  height: 20px !important;
+}
