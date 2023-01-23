@@ -10,6 +10,10 @@ import img3 from "./Images/Rectangle 12 (3).png";
 import img4 from "./Images/Rectangle 12 (4).png";
 import img5 from "./Images/Rectangle 12 (5).png";
 import img6 from "./Images/Rectangle 12.png";
+import avatar from "./Images/Avater.png";
+import loginBg from "./Images/loginBg.png";
+import error from "./Images/error.png";
+import bgError from "./Images/bgError.png";
 
 export default {
     logo,
@@ -24,4 +28,8 @@ export default {
     img4,
     img5,
     img6,
+    avatar,
+    loginBg,
+    error,
+    bgError
 }

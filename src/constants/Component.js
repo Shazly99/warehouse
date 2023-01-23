@@ -28,11 +28,16 @@ import Customer from './../Pages/Client/Reports/Customer/Customer';
 import OrdersReport from './../Pages/Client/Reports/Orders/Orders';
 import ProductReport from './../Pages/Client/Reports/Product/Product';
 import SideClient from './../Components/Sidebar/sideclient/SideClient';
+import Auth from './../Layout/Auth';
+import Login from './../Pages/auth/Login';
+import Error from './../Components/Shared/NotFound/Error';
+import UploadImg from './../Pages/Vendor/Products/AddProducts/UploadImg';
 
 export default {
     // Layout
     Client,
     Vendor,
+    Auth,
     // Vendor Components User 1
     Dashboard,
     Summary,
@@ -57,13 +62,17 @@ export default {
     Customer,
     OrdersReport,
     ProductReport,
-
+    UploadImg,
+    // Auth
+    Login,
+    
     // Components
     Navber,
     SubNav,
     Sildebar,
     SideClient,
     ButtonBase,
-    BaseHeader
+    BaseHeader,
+    Error
 }
 

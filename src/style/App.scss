@@ -121,6 +121,43 @@ td {
 }
 
 
-td {
+td,
+th {
     white-space: nowrap !important;
+}
+
+
+.app__profile-model-a {
+    text-decoration: none !important;
+}
+
+// page not found
+.app__error {
+    padding: 0;
+    margin: 0;
+    background-image: url('../assets/Images/bgError.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: $colorDark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px !important;
+    h3 {
+        /* Label */
+
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        text-align: center;
+        letter-spacing: -0.165px;
+
+        color: #FFFFFF;
+    }
 }

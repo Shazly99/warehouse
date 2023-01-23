@@ -24,6 +24,7 @@ function App() {
           ]
         },
         { path: '/venderProfile', element: <Component.Profile /> },
+        { path: '*', element: <Component.Error /> },
       ],
     },
     {
@@ -41,6 +42,15 @@ function App() {
           ]
         },
         { path: 'profile', element: <Component.ProfileClient /> },
+        { path: '*', element: <Component.Error /> },
+
+      ]
+    },
+    {
+      path: '/auth/', element: <Component.Auth />, children: [
+        { path: 'login', element: <Component.Login /> },
+        { path: '*', element: <Component.Error /> },
+
       ]
     }
   ])

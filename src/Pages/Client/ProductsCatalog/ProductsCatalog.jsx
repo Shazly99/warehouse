@@ -3,7 +3,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import { Col, Row, FormCheck, Form } from 'react-bootstrap';
+import { Col, Row, FormCheck, Form, Modal } from 'react-bootstrap';
 import './ProductsCatalog.scss'
 import Component from "../../../constants/Component";
 import Icons from '../../../constants/Icons';
@@ -21,27 +21,31 @@ let data = [
   { id: 6, img: Img.img6, title: 'Chanel Perfume 150m...', price: '150 SAR', sellPrice: '300 SAR', Inventory: 20, Nosales: 235 },
 ]
 const ProductsCatalog = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [value, setValue] = useState('Categories1');
 
 
   const handleChange = (event) => {
     setValue(event.target.value);
     console.log(event.target.value);
-  }; 
+  };
   const [selectedRows, setSelectedRows] = useState([]);
   const rows = data;
 
-   const handleRowClick = (row) => {
-     setSelectedRows(prevRows => {
+  const handleRowClick = (row) => {
+    setSelectedRows(prevRows => {
 
-       if (prevRows?.includes(row)) {
-         return prevRows.filter(item => item !== row);
-       }
-       else {
-         return [...prevRows, row];
-       }
-     });
-   }
+      if (prevRows?.includes(row)) {
+        return prevRows.filter(item => item !== row);
+      }
+      else {
+        return [...prevRows, row];
+      }
+    });
+  }
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -56,7 +60,7 @@ const ProductsCatalog = () => {
       <div className="app__catalog">
         <Row>
           <Col xl={2} lg={2} md={2} sm={1} className="app__catalog-left  ">
-            <div className="app__catalog_categories">
+            <div className="app__catalog_categories app__catalog_categories_border ">
               <h4>Categories</h4>
               <FormControl>
                 <RadioGroup
@@ -95,16 +99,43 @@ const ProductsCatalog = () => {
           </Col>
           <Col xl={10} lg={10} md={10} sm={11} className="app__catalog-right">
             <div className="app__catalog-right-header">
-              <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />} />
-                  
-              <div className=' px-4'  onClick={handleSelectAllClick}>
+
+              <div className="pp__profile-model">
+
+                <a className='app__profile-model-a ' onClick={handleShow}>
+                  <Component.ButtonBase title={"Add To My List"} bg={"danger"} icon={<Icons.add />} />
+                </a>
+                <Modal show={show} onHide={handleClose} centered>
+                  <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
+                    <Modal.Title className=' w-100 text-center' >Choose the list</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <FormControl>
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        name="radio-buttons-group"
+                        value={value}
+                        onChange={handleChange}
+                        className='Categories__mode'
+                      >
+                        <FormControlLabel value="Categories1" control={<Radio />} label="List 1" />
+                        <FormControlLabel value="Categories2" control={<Radio />} label="List 2" color='error' /> 
+                      </RadioGroup>
+                    </FormControl>
+                  </Modal.Body>
+                  <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
+                    <Component.ButtonBase onclick={handleClose} title={'Save'} bg={'danger'} />
+                  </Modal.Footer>
+                </Modal>
+              </div>
+              <div className=' px-4' onClick={handleSelectAllClick}>
                 <Form.Check
                   type={'checkbox'}
                   className="btn-danger mt-2"
                   label={`Select All`}
-                  
                 />
               </div>
+
             </div>
             <div className="app__catalog-right-product  px-2">
               <Row>
@@ -130,14 +161,14 @@ const ProductsCatalog = () => {
                           <label htmlFor="">No. of sales :</label>
                           <span>{item.Nosales}</span>
                         </div>
-                        
+
                         <FormCheck
-                        className='checkbox-content'
+                          className='checkbox-content'
                           reverse
                           label='Add To My List'
                           type={'checkbox'}
                           defaultChecked={true}
-                           checked={selectedRows?.includes(item)}
+                          checked={selectedRows?.includes(item)}
                         />
 
                       </div>

@@ -46,6 +46,11 @@
                 line-height: 27px;
                 color: $colorRed-0;
                 text-decoration: none;
+                cursor: pointer;
+                &:hover{
+                color: $colorRed-0;
+
+                }
             }
         }
     }
@@ -93,4 +98,15 @@
             }
         }
     }
+}
+
+.app__addprodects__img{
+    background-color: rebeccapurple !important;
+}
+
+.dropzone{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -3,10 +3,10 @@ import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-
-import Form from 'react-bootstrap/Form';
-
+import Form from 'react-bootstrap/Form'; 
+ 
 const AddProducts = () => {
+ 
     return (
         <>
             <Container fluid>
@@ -16,34 +16,7 @@ const AddProducts = () => {
                         <Component.BaseHeader h1={'Add New Product'} />
                         <div className="app__addOrder-form">
                             <Component.BaseHeader h2={"Product Image/Video"} />
-                            <div className="app__addprodects__header-images  ">
-                                <Row>
-                                    <Col xl={3} lg={3} md={6} sm={12}  >
-                                        <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                                            <Icons.upload size={30} />
-                                            <a href="">Upload Image or Video</a>
-                                        </div>
-                                    </Col>
-                                    <Col xl={3} lg={3} md={6} sm={12}  >
-                                        <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                                            <Icons.upload size={30} />
-                                            <a href="">Upload Image or Video</a>
-                                        </div>
-                                    </Col>
-                                    <Col xl={3} lg={3} md={6} sm={12}  >
-                                        <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                                            <Icons.upload size={30} />
-                                            <a href="">Upload Image or Video</a>
-                                        </div>
-                                    </Col>
-                                    <Col xl={3} lg={3} md={6} sm={12}  >
-                                        <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                                            <Icons.upload size={30} />
-                                            <a href="">Upload Image or Video</a>
-                                        </div>
-                                    </Col>
-                                </Row>
-                            </div>
+                            <Component.UploadImg/>
                             <div className="app__addprodects-form">
                                 <Form>
                                     <Row>
@@ -101,12 +74,12 @@ const AddProducts = () => {
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-ar">
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Product Name (ِAr)</Form.Label>
-                                                <Form.Control type="text"  dir='rtl'/>
+                                                <Form.Control type="text" dir='rtl' />
                                             </Form.Group>
 
                                             <Form.Group className="mt-3" controlId="formBasicPassword">
                                                 <Form.Label>Description (Ar)</Form.Label>
-                                                <Form.Control as="textarea" style={{ height: '100px', resize: 'none' }} dir='rtl'/>
+                                                <Form.Control as="textarea" style={{ height: '100px', resize: 'none' }} dir='rtl' />
                                             </Form.Group>
                                             <Form.Group className="mt-3" controlId="formBasicEmail">
                                                 <Form.Label className='d-flex flex-row gap-1 '>
