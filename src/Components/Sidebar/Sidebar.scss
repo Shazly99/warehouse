@@ -16,7 +16,7 @@
 /* Sidebar */
 .sidebar {
     color: white;
-
+    background-color: $colorDark;
     .top_section {
         display: flex;
         align-items: normal;
@@ -54,7 +54,7 @@
             // border-left: 4px solid $colorRed-0;
             transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
             color: $colorRed-0;
-            position: relative;
+            position: relative; 
 
             &::after {
                 content: '';
@@ -171,8 +171,8 @@
     left: 0;
     background-color: black;
     z-index: 99;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow: scroll;
+    // overflow-x: hidden;
 }
 
 .react-tooltip {

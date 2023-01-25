@@ -5,7 +5,6 @@ import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import data from './data';
 import { Table, Container } from 'react-bootstrap';
-import { icons } from 'react-icons';
 const Product = () => {
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {

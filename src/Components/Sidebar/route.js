@@ -25,7 +25,7 @@ const routes = [
       path: "/venderProfile",
       name: "Profile",
       icon: <Icons.profile size={20}/>,
-    },
+    }, 
  
   ];
 

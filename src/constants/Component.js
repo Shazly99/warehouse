@@ -29,7 +29,7 @@ import OrdersReport from './../Pages/Client/Reports/Orders/Orders';
 import ProductReport from './../Pages/Client/Reports/Product/Product';
 import SideClient from './../Components/Sidebar/sideclient/SideClient';
 import Auth from './../Layout/Auth';
-import Login from './../Pages/auth/Login';
+import Login from '../Pages/auth/Login/Login';
 import Error from './../Components/Shared/NotFound/Error';
 import UploadImg from './../Pages/Vendor/Products/AddProducts/UploadImg';
 

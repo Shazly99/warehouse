@@ -12,7 +12,6 @@ const Customer = () => {
   };
 
   const search = () => {
-    console.log('search Orders');
   };
   return (
     <>

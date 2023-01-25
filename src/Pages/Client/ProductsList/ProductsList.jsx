@@ -33,7 +33,6 @@ const ProductsList = () => {
   }
 
   const handleSelectAllClick = (event) => {
-    console.log(event);
     if (event.target.checked) {
       // select all rows
       setSelectedRows(rows);

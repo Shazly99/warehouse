@@ -1,119 +1,142 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import Icons from '../../../../constants/Icons';
-const thumbsContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 16,
-};
-
-const thumb = {
-    display: 'inline-flex',
-    borderRadius: 2,
-    border: '1px solid #eaeaea',
-    marginBottom: 8,
-    marginRight: 8,
-    width: 160,
-    height: 100,
-    padding: 4,
-    boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center'
-};
-
-const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    // overflow: 'hidden'
-};
-
-const img = {
-    display: 'block',
-    width: 'auto',
-    height: '100%'
-};
+import '../Products.scss'
 
 const UploadImg = () => {
-    const [file, setFile] = useState(null);
+    const [images, setImages] = useState([]);
+    const [images1, setImages1] = useState([]);
+    const [images2, setImages2] = useState([]);
+    const [images3, setImages3] = useState([]);
 
-    const handleFileInput = (e) => {
-        setFile(e.target.files[0]);
+    const onDrop = (acceptedFiles) => {
+        acceptedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImages((prevImages) => [...prevImages, reader.result]);
+            };
+            reader.readAsDataURL(file);
+        });
     }
-    const [files, setFiles] = useState([]);
-    const { getRootProps, getInputProps } = useDropzone({
-        accept: {
-            'image/*': []
-        },
-        onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })));
-        }
-    });
-    const thumbs = files.map(file => (
-        <div style={thumb} key={file.name}>
-            <div style={thumbInner}>
-                <img
-                    src={file.preview}
-                    style={img}
-                    // Revoke data uri after image is loaded
-                    onLoad={() => { URL.revokeObjectURL(file.preview) }}
-                />
-            </div>
-        </div>
-    ));
+    const onDrop1 = (acceptedFiles) => {
+        acceptedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImages1((prevImages) => [...prevImages, reader.result]);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    const onDrop2 = (acceptedFiles) => {
+        acceptedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImages2((prevImages) => [...prevImages, reader.result]);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    const onDrop3 = (acceptedFiles) => {
+        acceptedFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImages3((prevImages) => [...prevImages, reader.result]);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
 
-    useEffect(() => {
-        // Make sure to revoke the data uris to avoid memory leaks, will run on unmount
-        return () => files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, []);
     return (
         <>
             <div className="app__addprodects__header-images  ">
                 <Row>
                     <Col xl={3} lg={3} md={6} sm={12}  >
                         <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                            <section className="container dropzone ">
-                                <div {...getRootProps({ className: 'dropzone' })}>
-                                    <input {...getInputProps()} />
-                                    <Icons.upload size={30} />
-                                    <a  >Upload Image or Video</a>
-                                </div>
-                                <aside style={thumbsContainer}>
-                                    {thumbs}
-                                </aside>
-                            </section>
+                            <Dropzone onDrop={onDrop} accept="image/*">
+                                {({ getRootProps, getInputProps }) => (
+                                    <section >
+                                        <div {...getRootProps()} className='d-flex justify-content-center flex-column align-items-center ' >
+                                            <Icons.upload size={30} />
+                                            <a  >Upload Image or Video</a>
+                                        </div>
+                                        <aside className=' d-flex justify-content-center ' style={{ position: 'relative' }}>
+                                            <img src={images[0]} className='mt-2 w-50' />
+                                            {images.length == 0 ? '' :
+                                                <Icons.bin size={27} onClick={() => setImages([])} className='app__addprodects__delete' color='#BF1E30' />
+                                            }
+                                        </aside>
+                                    </section>
+                                )}
+                            </Dropzone>
                         </div>
                     </Col>
+
                     <Col xl={3} lg={3} md={6} sm={12}  >
                         <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                            <section className="container dropzone ">
-                                <div {...getRootProps({ className: 'dropzone' })}>
-                                    <input {...getInputProps()} />
-                                    <Icons.upload size={30} />
-                                    <a>Upload Image or Video</a>
-                                </div>
-                                <aside style={thumbsContainer}>
-                                    {thumbs}
-                                </aside>
-                            </section>
+                            <Dropzone onDrop={onDrop1} accept="image/*">
+                                {({ getRootProps, getInputProps }) => (
+                                    <section >
+                                        <div {...getRootProps()} className='d-flex justify-content-center flex-column align-items-center ' >
+                                            <Icons.upload size={30} />
+                                            <a  >Upload Image or Video</a>
+                                        </div>
+                                        <aside className=' d-flex justify-content-center ' style={{ position: 'relative' }}>
+                                            <img src={images1[0]} className='mt-2 w-50' />
+                                            {images1.length == 0 ? '' :
+                                                <Icons.bin size={27} onClick={() => setImages1([])} className='app__addprodects__delete' color='#BF1E30' />
+                                            }
+                                        </aside>
+                                    </section>
+                                )}
+                            </Dropzone>
                         </div>
                     </Col>
+
                     <Col xl={3} lg={3} md={6} sm={12}  >
                         <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                            <Icons.upload size={30} />
-                            <a href="">Upload Image or Video</a>
+                            <Dropzone onDrop={onDrop2} accept="image/*">
+                                {({ getRootProps, getInputProps }) => (
+                                    <section >
+                                        <div {...getRootProps()} className='d-flex justify-content-center flex-column align-items-center ' >
+                                            <Icons.upload size={30} />
+                                            <a  >Upload Image or Video</a>
+                                        </div> 
+                                        <aside className=' d-flex justify-content-center ' style={{ position: 'relative' }}>
+                                            <img src={images2[0]} className='mt-2 w-50' />
+                                            {images2.length == 0 ? '' :
+                                                <Icons.bin size={27} onClick={() => setImages2([])} className='app__addprodects__delete' color='#BF1E30' />
+                                            }
+                                        </aside>
+                                    </section>
+                                )}
+                            </Dropzone>
                         </div>
                     </Col>
+
                     <Col xl={3} lg={3} md={6} sm={12}  >
                         <div className="app__addprodects__img d-flex justify-content-center align-items-center">
-                            <Icons.upload size={30} />
-                            <a href="">Upload Image or Video</a>
+                            <Dropzone onDrop={onDrop3} accept="image/*">
+                                {({ getRootProps, getInputProps }) => (
+                                    <section >
+                                        <div {...getRootProps()} className='d-flex justify-content-center flex-column align-items-center ' >
+                                            <Icons.upload size={30} />
+                                            <a  >Upload Image or Video</a>
+                                        </div>
+                                        <aside className=' d-flex justify-content-center ' style={{ position: 'relative' }}>
+                                            <img src={images3[0]} className='mt-2 w-50' />
+                                            {images3.length == 0 ? '' :
+                                                <Icons.bin size={27} onClick={() => setImages3([])} className='app__addprodects__delete' color='#BF1E30' />
+                                            }
+                                        </aside>
+                                    </section>
+                                )}
+                            </Dropzone>
                         </div>
                     </Col>
+
+
                 </Row>
             </div>
         </>

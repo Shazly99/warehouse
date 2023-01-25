@@ -22,7 +22,16 @@
 }
 
 .app__addprodects {
-
+.app__addprodects__delete{
+    background-color:#f1f1f1;
+    padding: 5px;
+    border-radius: 50% ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.458);
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left:8px;
+}
 
     .app__addprodects__header-images {
         .app__addprodects__img {

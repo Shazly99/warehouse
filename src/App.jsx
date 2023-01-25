@@ -1,29 +1,55 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Component from './constants/Component';
 import './style/App.scss';
+import { Toaster } from 'react-hot-toast';
+import jwtDecode from 'jwt-decode';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [userData, setUserData] = useState(null);
+  function userDecode() {
+    let Incode = localStorage.getItem('token');
+    let decode = jwtDecode(Incode)
+    setUserData(decode)
+  }
+  useEffect(() => {
+    userDecode()
+  }, [])
+  
+  function ProtectedRoutes({ children }) {
+    if (localStorage.getItem('token')) {
+      return children
+    } else {  
+      return <Navigate to="/auth/login" replace={true} />
+
+    }
+  }
+  function LogOut() {
+    localStorage.removeItem('token')
+    setUserData(null)
+    return <Navigate to="/auth/login" replace={true} />
+  }
 
   const root = createBrowserRouter([
     {
-      path: '/', element: <Component.Vendor />, children: [
-        { index: true, element: <Component.Dashboard /> },
+      path: '/', element: <ProtectedRoutes> <Component.Vendor LogOut={LogOut} /></ProtectedRoutes>, children: [
+        { index: true, element: <ProtectedRoutes><Component.Dashboard /> </ProtectedRoutes> },
         {
           path: '/venderProducts', children: [
-            { index: true, element: <Component.Products /> },
-            { path: 'addProduct', element: <Component.AddProducts /> },
+            { index: true, element: <ProtectedRoutes><Component.Products /></ProtectedRoutes> },
+            { path: 'addProduct', element: <ProtectedRoutes><Component.AddProducts /></ProtectedRoutes> },
           ]
         },
         {
-          path: '/venderOrder', element: <Component.Orders />
+          path: '/venderOrder', element: <ProtectedRoutes><Component.Orders /></ProtectedRoutes>
         },
         {
           path: '/venderSubuser', children: [
-            { index: true, element: <Component.SubUsers /> },
-            { path: 'addUser', element: <Component.AddUser /> },
+            { index: true, element: <ProtectedRoutes><Component.SubUsers /> </ProtectedRoutes> },
+            { path: 'addUser', element: <ProtectedRoutes><Component.AddUser /> </ProtectedRoutes> },
           ]
         },
-        { path: '/venderProfile', element: <Component.Profile /> },
+        { path: '/venderProfile/:id', element: <ProtectedRoutes> <Component.Profile /></ProtectedRoutes> },
         { path: '*', element: <Component.Error /> },
       ],
     },
@@ -56,7 +82,23 @@ function App() {
   ])
   return (
     <>
-
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          duration: 3000,
+          style: {
+            fontFamily: ' Arial, Helvetica, sans-serif',
+            textTransform: 'capitalize',
+            zIndex: '9999',
+            background: '#fff',
+            color: '#000',
+          },
+        }}
+        containerStyle={{
+          top: 60
+        }}
+      />
       <RouterProvider router={root} />
     </>
   );

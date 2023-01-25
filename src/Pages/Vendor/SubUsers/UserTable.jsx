@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import data from './data.js';
 import { Table } from 'react-bootstrap'
 import Icons from '../../../constants/Icons.js';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import useFetch from './../../../Api/hook/useFetch';
+import { Link } from 'react-router-dom'; 
+import { VendersContext } from './../../../Api/context/VenderStore';
 
 const UserTable = () => {
+    let {get } = useFetch()
+    let {user} =useContext(VendersContext);
+ 
+   async function deleteitem(item) {
+        let {data} =await axios.get(`https://zariexpress.com/api/vendor/users/delete/${item}`,{
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            }
+        })
+        get()
+    }
+    
     return (
         <>
             <Table striped responsive={true} className='rounded-3 '>
@@ -19,37 +36,41 @@ const UserTable = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        data.map((item, index) => (
+                        user.map((item, index) => (
                             <tr key={index}>
                                 <td>
-                                    <div>
-                                        {item.name}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div  >
-                                        {item.email}
-                                    </div>
-                                </td>
-                                <td className='text-center'>
                                     <div>
                                         {item.UserName}
                                     </div>
                                 </td>
-                                <td className='text-center'>
-                                    <div>
-                                        {item.Mobile}
+                                <td>
+                                    <div  >
+                                        {item.UserEmail}
                                     </div>
                                 </td>
                                 <td className='text-center'>
                                     <div>
-                                        {item.AccessType}
+                                        {item.UserAppLanguage}
+                                    </div>
+                                </td>
+                                <td className='text-center'>
+                                    <div>
+                                        {item.UserPhone}
+                                    </div>
+                                </td>
+                                <td className='text-center'>
+                                    <div>
+                                        {item.UserStatus}
                                     </div>
                                 </td>
                                 <td className='icon'>
                                     <div className="icons">
-                                        <Icons.edit />
-                                        <Icons.bin />
+                                        <Link to={`/venderProfile/${item.IDUser}`} >
+                                            <Icons.edit />
+                                        </Link>
+                                        <a onClick={()=>deleteitem(item.IDUser)}>
+                                            <Icons.bin />
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

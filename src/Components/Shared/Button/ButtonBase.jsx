@@ -14,7 +14,7 @@ const ButtonBase = ({ title, bg, icon, path, app }) => {
                             {title}
                         </Button>
                     </Link> :
-                    <Button variant={bg} onClick={onclick} className='d-flex align-items-center justify-content-center'>
+                    <Button variant={bg} type='submit' onClick={onclick} className='d-flex align-items-center justify-content-center'>
                         {icon}
                         {title}
                     </Button>

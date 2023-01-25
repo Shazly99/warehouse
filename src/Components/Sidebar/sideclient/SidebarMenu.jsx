@@ -104,7 +104,6 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
               <>
                 <motion.div variants={menuItemAnimation} key={i} custom={i}>
                   <NavLink to={subRoute.path} className="link">
-                    {console.log(subRoute.path)}
                     <div className="icon">{subRoute.icon}</div>
                     <motion.div className="link_text">
                       {/* model popup create new list when model == true  */}

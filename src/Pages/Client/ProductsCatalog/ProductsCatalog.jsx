@@ -30,7 +30,6 @@ const ProductsCatalog = () => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(event.target.value);
   };
   const [selectedRows, setSelectedRows] = useState([]);
   const rows = data;

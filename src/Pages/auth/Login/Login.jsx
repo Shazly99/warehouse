@@ -1,21 +1,39 @@
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
-import Img from '../../assets/Img';
-import Component from '../../constants/Component';
+import Img from '../../../assets/Img';
+import Component from '../../../constants/Component';
 import "./login.scss";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import validationSchema from './Schema';
+import SignInForm from './validationForm';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
-    const [password, setPasswordValue] = React.useState("password");
-    const [passwordInput, setPasswordInput] = React.useState("");
-    const onPasswordChange = (e) => {
-        setPasswordInput(e.target.value);
-    };
-    const toggle = () => {
-        if (password === "password") {
-            setPasswordValue("text");
-            return;
+    const [userData, setUserData] = useState(null)
+    let navigate = useNavigate()
+
+
+    const userDataApi = async () => {
+        if (userData) {
+            let { data } = await axios.post(`https://zariexpress.com/api/vendor/login`, userData);
+            if (data.Success == true) {
+                localStorage.setItem("token", data.Response.AccessToken);
+                toast.success(data.ApiMsgEn);
+                navigate('/');
+            } else {
+                toast.error(data.ApiMsgEn);
+            }
         }
-        setPasswordValue("password");
-    };
+    }
+
+    useEffect(() => {
+        userDataApi()
+    }, [userData])
+
+
     return (
         <>
             <div className="app__login">
@@ -26,13 +44,21 @@ const Login = () => {
                                 <img src={Img.loginBg} />
                                 <Component.BaseHeader h1={'Sign in'} colorW="text-light" />
 
-                                <div className="   w-75" >
-                                    <div className="email ">
-                                        <label htmlFor="" >Email</label>
-                                        <input className='w-100' type="email" placeholder='Enter your email' />
-                                    </div>
+                                <div className="w-75" >
+                                    <Formik
+                                        initialValues={{ UserName: '', Password: '' }}
 
-                                    <div className="email ">
+                                        onSubmit={values => {
+                                            setUserData(values)
+                                            validationSchema = { validationSchema }
+                                        }}
+                                    >
+                                        {SignInForm}
+                                    </Formik>
+
+              
+
+                                    {/* <div className="email ">
                                         <label htmlFor="" >Password</label>
                                         <div className="password__input d-flex">
                                             <input
@@ -70,8 +96,7 @@ const Login = () => {
                                             </button>
                                         </div>
 
-                                    </div>
-                                    <button className='app__login-btn'>Sign in</button>
+                                    </div>   */} 
                                 </div>
                             </div>
                         </Col>

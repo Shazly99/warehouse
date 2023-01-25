@@ -6,13 +6,12 @@ import routes from './route.js';
 import { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import { icons } from 'react-icons';
 import Icons from "../../constants/Icons";
 
 
 
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children, LogOut }) => {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -51,7 +50,7 @@ const Sidebar = ({ children }) => {
 
             <div className="top_section  ">
               <AnimatePresence>
-                {isOpen&& (
+                {isOpen && (
                   <motion.h1
                     variants={showAnimation}
                     initial="hidden"
@@ -60,7 +59,7 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={img.logo}
                   >
-                    <img  src={img.logo} className="w-100" />
+                    <img src={img.logo} className="w-100" />
                   </motion.h1>
                 )}
                 <div className="bars">
@@ -70,51 +69,90 @@ const Sidebar = ({ children }) => {
             </div>
 
             <section className='routes'>
-                {
-                  routes.map((root, i) => (
-                    <motion.div
-                      key={i}
-                      animate={{
-                        transition: {
-                          duration: 2,
-                          damping: 10
-                        }
-                      }}
-                    >
-                      <NavLink to={root.path} key={i} className="link  " >
-                        <div className="icon" id={root.name} data-tooltip-content={root.name}>
-                          {root.icon}
-                        </div>
+              {
+                routes.map((root, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{
+                      transition: {
+                        duration: 2,
+                        damping: 10
+                      }
+                    }}
+                  >
+                    <NavLink to={root.path && root?.path} key={i} className="link" >
+                      <div className="icon" id={root?.name} data-tooltip-content={root.name}>
+                        {root.icon}
+                      </div>
+                      {
+                        !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#BF1E30' }} />
+                      }
+
+                      <AnimatePresence>
                         {
-                          !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#BF1E30' }} />
+                          isOpen &&
+                          <>
+                            <motion.div
+                              variants={showAnimation
+                              }
+                              initial={"hidden"}
+                              animate={"show"}
+                              exit={"hidden"}
+                              className="link_text"
+                            >
+                              {root.name}
+                            </motion.div>
+
+
+
+
+                          </>
                         }
+                      </AnimatePresence>
+                    </NavLink>
 
-                        <AnimatePresence>
-                          {
-                            isOpen &&
-                            <>
-                              <motion.div
-                                variants={showAnimation
-                                }
-                                initial={"hidden"}
-                                animate={"show"}
-                                exit={"hidden"}
-                                className="link_text"
-                              >
-                                {root.name}
-                              </motion.div>
+                  </motion.div>
+                ))
+              }
 
 
+              <motion.div
 
+                animate={{
+                  transition: {
+                    duration: 2,
+                    damping: 10
+                  }
+                }}
+              >
+                <NavLink onClick={LogOut}  to={'/auth/login'}  className="link" >
+                  <div className="icon" id={'LogOut'} data-tooltip-content={'LogOut'}>
+                    <Icons.logout size={20} />
+                  </div>
+                  {
+                    !isOpen && <ReactTooltip anchorId={'LogOut'} data-tip={'LogOut'} place="right" style={{ zIndex: 88888888, background: '#BF1E30' }} />
+                  }
 
-                            </>
+                  <AnimatePresence>
+                    {
+                      isOpen &&
+                      <>
+                        <motion.div
+                          variants={showAnimation
                           }
-                        </AnimatePresence>
-                      </NavLink>
+                          initial={"hidden"}
+                          animate={"show"}
+                          exit={"hidden"}
+                          className="link_text"
+                        >
+                          Log Out
+                        </motion.div>
+                      </>
+                    }
+                  </AnimatePresence>
+                </NavLink>
 
-                    </motion.div>
-                  ))
-                }  
+              </motion.div>
             </section>
           </div>
 
