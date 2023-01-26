@@ -12,9 +12,9 @@ import { useParams } from 'react-router-dom';
 
 function Profile() {
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
   const [data, setData] = useState({});
 
@@ -104,7 +104,7 @@ function Profile() {
 
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>First Name</Form.Label>
-                  <Form.Control type="text" name='firstname' value={'shazly'}  ref={firstname} />
+                  <Form.Control type="text" name='firstname'    ref={firstname} />
                 </Form.Group>
 
 

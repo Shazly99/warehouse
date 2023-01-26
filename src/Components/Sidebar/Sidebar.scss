@@ -5,7 +5,7 @@
     z-index: 9999;
 
     @media screen and (max-width:600px) {
-        display: none;
+        // display: none;
     }
 
     main {
@@ -16,7 +16,7 @@
 /* Sidebar */
 .sidebar {
     color: white;
-    background-color: $colorDark;
+    // background-color: $colorDark;
     .top_section {
         display: flex;
         align-items: normal;

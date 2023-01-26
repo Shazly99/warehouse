@@ -1,20 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { json, NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import './Sidebar.scss'
 import img from '../../assets/Img'
 import routes from './route.js';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import Icons from "../../constants/Icons";
+import useFetch from "../../Api/hook/useFetch";
+import Component from "../../constants/Component";
+import { VendersContext } from './../../Api/context/VenderStore';
 
 
 
 
 const Sidebar = ({ children, LogOut }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const toggle = () => setIsOpen(!isOpen);
 
+  let { user, isOpen, toggle } = useContext(VendersContext);
 
   const showAnimation = {
     hidden: {
@@ -125,7 +127,7 @@ const Sidebar = ({ children, LogOut }) => {
                   }
                 }}
               >
-                <NavLink onClick={LogOut}  to={'/auth/login'}  className="link" >
+                <NavLink onClick={LogOut} to={'/auth/login'} className="link" >
                   <div className="icon" id={'LogOut'} data-tooltip-content={'LogOut'}>
                     <Icons.logout size={20} />
                   </div>
@@ -159,8 +161,10 @@ const Sidebar = ({ children, LogOut }) => {
         </motion.div>
 
       </div>
+      {/* <Component.Vendor isOpen={isOpen}/> */}
     </>
   );
+
 };
 
 export default Sidebar;

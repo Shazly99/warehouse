@@ -5,6 +5,8 @@ import axios from 'axios';
 export const VendersContext = createContext([])
 
 function VenderContext({ children }) {
+  const [isOpen, setIsOpen] = useState(true);
+  const toggle = () => setIsOpen(!isOpen);
 
     const [user, setUser] = useState([])
 
@@ -23,7 +25,7 @@ function VenderContext({ children }) {
 
  
   return (
-    <> <VendersContext.Provider value={{user}}>
+    <> <VendersContext.Provider value={{user,isOpen,toggle}}>
       {children}
     </VendersContext.Provider>
     </>

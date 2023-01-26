@@ -32,3 +32,9 @@ input[type=checkbox] {
   width: 20px !important;
   height: 20px !important;
 }
+
+.title {
+  font-size: 3rem;
+  display: grid;
+  place-items: center;
+}

@@ -4,6 +4,7 @@ import './style/App.scss';
 import { Toaster } from 'react-hot-toast';
 import jwtDecode from 'jwt-decode';
 import { useState, useEffect } from 'react';
+import VenderContext from './Api/context/VenderStore';
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -15,11 +16,11 @@ function App() {
   useEffect(() => {
     userDecode()
   }, [])
-  
+
   function ProtectedRoutes({ children }) {
     if (localStorage.getItem('token')) {
       return children
-    } else {  
+    } else {
       return <Navigate to="/auth/login" replace={true} />
 
     }
@@ -99,7 +100,9 @@ function App() {
           top: 60
         }}
       />
-      <RouterProvider router={root} />
+      <VenderContext>
+        <RouterProvider router={root} />
+      </VenderContext>
     </>
   );
 }
