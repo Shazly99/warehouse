@@ -2,21 +2,38 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Component from './constants/Component';
 import './style/App.scss';
 import { Toaster } from 'react-hot-toast';
-import jwtDecode from 'jwt-decode';
+// import jwtDecode from 'jwt-decode';
 import { useState, useEffect } from 'react';
 import VenderContext from './Api/context/VenderStore';
+import axios from 'axios';
 
 function App() {
-  const [userData, setUserData] = useState(null);
-  function userDecode() {
-    let Incode = localStorage.getItem('token');
-    let decode = jwtDecode(Incode)
-    setUserData(decode)
-  }
-  useEffect(() => {
-    userDecode()
-  }, [])
+  // const [userData, setUserData] = useState(null);
+  // function userDecode() {
+  //   let Incode = localStorage.getItem('token');
+  //   let decode = jwtDecode(Incode)
+  //   setUserData(decode)
+  // }
+  // useEffect(() => {
+  //   userDecode()
+  // }, [])
+  async function get() {
+    let resp = await axios.post(`${process.env.REACT_APP_BASE_URL}vendor/users`, {}, {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        }
+    });
+    // setUser(resp.data.Response)
+    console.log(resp.data.Response);
+}
 
+useEffect(() => {
+    get().then((res)=>{
+      console.log(res);
+    }).catch((er)=>{
+      console.log(er);
+    })
+}, [])
   function ProtectedRoutes({ children }) {
     if (localStorage.getItem('token')) {
       return children
@@ -27,7 +44,7 @@ function App() {
   }
   function LogOut() {
     localStorage.removeItem('token')
-    setUserData(null)
+    // setUserData(null)
     return <Navigate to="/auth/login" replace={true} />
   }
 

@@ -17,10 +17,15 @@ function VenderContext({ children }) {
             }
         });
         setUser(resp.data.Response)
+        console.log(resp);
     }
 
     useEffect(() => {
-        get()
+        get().then((res)=>{
+          console.log(res);
+        }).catch((er)=>{
+          console.log(er);
+        })
     }, [])
 
  

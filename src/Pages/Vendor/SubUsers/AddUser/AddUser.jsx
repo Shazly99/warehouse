@@ -45,6 +45,7 @@ const AddUser = () => {
             }
         });
         // setUser(resp.data.Response)
+        console.log(resp);
     }
 
     useEffect(() => {

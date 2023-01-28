@@ -24,10 +24,8 @@ const UserTable = () => {
         setSelectedObject(singelRow);
         console.log(selectedObject);
     }
-    useEffect(() => {
-        console.log(data);
-    }, [])
-    
+
+  
     
     let { get } = useFetch()
     async function deleteitem(item) {
@@ -38,7 +36,9 @@ const UserTable = () => {
         })
         get()
     }
-
+    useEffect(() => {      
+        console.log(data);
+    }, [])
     return (
         <>
             <Table striped responsive={true} className='rounded-3 '>
