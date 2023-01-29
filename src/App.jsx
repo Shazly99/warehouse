@@ -17,23 +17,7 @@ function App() {
   // useEffect(() => {
   //   userDecode()
   // }, [])
-  async function get() {
-    let resp = await axios.post(`${process.env.REACT_APP_BASE_URL}vendor/users`, {}, {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token'),
-        }
-    });
-    // setUser(resp.data.Response)
-    console.log(resp.data.Response);
-}
-
-useEffect(() => {
-    get().then((res)=>{
-      console.log(res);
-    }).catch((er)=>{
-      console.log(er);
-    })
-}, [])
+ 
   function ProtectedRoutes({ children }) {
     if (localStorage.getItem('token')) {
       return children
@@ -67,7 +51,7 @@ useEffect(() => {
             { path: 'addUser', element: <ProtectedRoutes><Component.AddUser /> </ProtectedRoutes> },
           ]
         },
-        { path: '/venderProfile/:id', element: <ProtectedRoutes> <Component.Profile /></ProtectedRoutes> },
+        { path: '/venderProfile', element: <ProtectedRoutes> <Component.Profile /></ProtectedRoutes> },
         { path: '*', element: <Component.Error /> },
       ],
     },

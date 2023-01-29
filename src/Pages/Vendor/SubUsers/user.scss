@@ -1,13 +1,17 @@
 @import '../../../style/varibale';
 
-.app_addOrder{
-    input, select,option{
+.app_addOrder {
+
+    input,
+    select,
+    option {
         background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
         border: none !important;
-        border-radius: $radius-sm !important; 
+        border-radius: $radius-sm !important;
         height: 50px !important;
-    
+
     }
+
     label {
         font-family: $fontBase !important;
         font-style: normal;
@@ -15,34 +19,83 @@
         font-size: 21px !important;
         line-height: 32px !important;
         /* identical to box height */
-    
-    
+
+
         /* Black */
-    
+
         color: $colorDark;
-    
+
     }
 }
 
-.app__addOrder-form{
+.app__addOrder-form {
     background-color: $colorLight !important;
     margin-top: 16px !important;
     padding: 32px 16px;
     padding-bottom: 10px;
-    border-radius:$radius-sm;
+    border-radius: $radius-sm;
 }
- 
 
 
-.app__order{
-    .app__order-table{ 
+
+.app__order {
+    .app__order-table {
         padding: 0 20px !important;
+
         td {
             >div {
-         
+
                 height: 70px !important;
-         
+
             }
         }
+    }
+}
+
+.modal-footer {
+    button {
+        height: 50px;
+        width: 200px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        border-radius: 5px; 
+        &:nth-child(2){
+            &:hover{
+                color:  white !important;
+            }
+        }
+    }
+    
+}
+
+.modal-header {
+    h1 {
+        font-family: 'Poppins' !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 25px !important;
+        line-height: 38px;
+        /* identical to box height */
+        text-align: center;
+    }
+}
+
+.model-body {
+    p{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* Dark Gray */
+
+        color: #4A4A4A; 
     }
 }

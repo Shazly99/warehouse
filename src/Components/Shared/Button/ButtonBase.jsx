@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 
-const ButtonBase = ({ title, bg, icon, path, app }) => {
+const ButtonBase = ({ title, bg, icon, path,onclick, app }) => {
     return (
         <div className='baseBtn'>
             {

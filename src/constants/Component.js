@@ -32,6 +32,7 @@ import Auth from './../Layout/Auth';
 import Login from '../Pages/auth/Login/Login';
 import Error from './../Components/Shared/NotFound/Error';
 import UploadImg from './../Pages/Vendor/Products/AddProducts/UploadImg';
+import UpdateUser from './../Pages/Vendor/SubUsers/UpdateUser';
 
 export default {
     // Layout
@@ -47,6 +48,7 @@ export default {
     Orders, 
     AddUser,
     UserTable,
+    UpdateUser,
     Products,
     ProductsTable,
     AddProducts, 

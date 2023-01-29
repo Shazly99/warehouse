@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Component from '../../../../constants/Component';
-import { Col, FloatingLabel, Row } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container'; 
+import { Col, Row } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css' 
+import 'react-phone-input-2/lib/style.css'
 import { Form } from 'react-bootstrap';
 import { useRef } from 'react';
 import Icons from '../../../../constants/Icons';
+import { PostData, apiheader } from './../../../../Api/hook/fetchData';
 
 const AddUser = () => {
     const [data, setData] = useState({});
-
 
     const firstname = useRef();
     const lastname = useRef();
@@ -34,22 +34,19 @@ const AddUser = () => {
             'UserPhoneFlag': '+' + Country,
             'UserName': firstname.current.value + ' ' + lastname.current.value,
         })
-        get().then((res)=>{
-        }).catch((err)=>{
+
+        get().then((res) => {
+
+        }).catch((err) => {
+
         })
     }
     async function get() {
-        let resp = await axios.post(`https://zariexpress.com/api/vendor/users/add`, data, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-            }
-        });
-        // setUser(resp.data.Response)
-        console.log(resp);
+        let resp = await PostData(`https://zariexpress.com/api/vendor/users/add`, data, apiheader)
     }
 
     useEffect(() => {
-
+        get();
     }, [data, phoneNumber])
 
     return (
@@ -118,8 +115,8 @@ const AddUser = () => {
                                 </Col>
                             </Row>
                             <div className='d-flex justify-content-center align-content-center my-5'>
-                                <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />}   />
-                            </div> 
+                                <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />} />
+                            </div>
                         </form>
                     </div>
                 </div>

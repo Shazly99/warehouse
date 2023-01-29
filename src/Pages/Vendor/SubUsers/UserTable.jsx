@@ -1,52 +1,34 @@
 import React, { useContext } from 'react'
-import data from './data.js';
-import { Modal, Table, Form } from 'react-bootstrap'
-import Icons from '../../../constants/Icons.js';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import useFetch from './../../../Api/hook/useFetch';
-import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap'
+import Icons from '../../../constants/Icons.js'; 
+import { useEffect, useState } from 'react'; 
 import { VendersContext } from './../../../Api/context/VenderStore';
-import Component from '../../../constants/Component.js';
-import UpdateUser from './UpdateUser.jsx';
+import Component from '../../../constants/Component.js'; 
 
 const UserTable = () => {
-    let { user } = useContext(VendersContext);
+    let { user, deleteUser } = useContext(VendersContext);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [selectedObject, setSelectedObject] = useState(null);
+    const [update, setUpdate] = useState('');
 
-    const handleRowClick = (id) => {
+    const handleRowClick = (id) => { 
         handleShow()
-        console.log(id);
-        const singelRow = user.find(object => object.IDUser === id);
-        setSelectedObject(singelRow);
-        console.log(selectedObject);
+        const singelRow = user.find(object => object?.IDUser === id);
+        setUpdate(singelRow);
     }
+    const [IdThisUser, setId] = useState(null)
+    const idUser = id => setId(id)
+    useEffect(() => { 
+    }, [IdThisUser])
 
-  
-    
-    let { get } = useFetch()
-    async function deleteitem(item) {
-        let { data } = await axios.get(`https://zariexpress.com/api/vendor/users/delete/${item}`, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token'),
-            }
-        })
-        get()
-    }
-    useEffect(() => {      
-        console.log(data);
-    }, [])
     return (
         <>
             <Table striped responsive={true} className='rounded-3 '>
                 <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                         <th>Name</th>
-                        <th> Email</th>
-                        {/* <th> User-Name</th> */}
+                        <th> Email</th> 
                         <th>Mobile</th>
                         <th>Access Type</th>
                         <th>Action</th>
@@ -65,7 +47,7 @@ const UserTable = () => {
                                     <div  >
                                         {item.UserEmail}
                                     </div>
-                                </td> 
+                                </td>
                                 <td className='text-center'>
                                     <div>
                                         {item.UserPhone}
@@ -77,22 +59,50 @@ const UserTable = () => {
                                         {item.UserStatus}
                                     </div>
                                 </td>
+
+
                                 <td className='icon'>
                                     <div className="icons">
                                         {/* <Link to={`/venderProfile/${item.IDUser}`} > */}
                                         {/* </Link> */}
 
                                         <div className="pp__profile-model">
-                                            <a className='app__profile-model-a' onClick={() => handleRowClick(item.IDUser)}>
+                                            <a className='app__profile-model-a' onClick={() => handleRowClick(item.IDUser)} data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                 <Icons.edit color='#40AB45' />
                                             </a>
-                                            <Modal show={show} onHide={handleClose}  centered>
-                                                <UpdateUser   show={show} Userdata={selectedObject} handleClose={handleClose} />
-                                            </Modal>
+                                            <div className="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal-dialog  modal-dialog-centered">
+                                                    <div className="modal-content">
+                                                        <Component.UpdateUser update={update}/>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         </div>
-                                        <a onClick={() => deleteitem(item.IDUser)}>
-                                            <Icons.bin />
-                                        </a>
+
+                                        <div className="pp__profile-model">
+
+                                            <a className='app__profile-model-a' onClick={() => idUser(item.IDUser)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                <Icons.bin color='#E20000' />
+                                            </a>
+                                            <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div className="modal-dialog  modal-dialog-centered">
+                                                    <div className="modal-content">
+                                                        <div className="modal-header ">
+                                                            <h1 className="modal-title fs-5  w-100 text-center" id="staticBackdropLabel">Delete User</h1>
+                                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div className="model-body">
+                                                            <p>Are you sure you want to delete this user ?  </p>
+                                                        </div>
+                                                        <div className="modal-footer d-flex justify-content-center align-item-center  ">
+                                                            <button data-bs-dismiss="modal" onClick={() => deleteUser(IdThisUser)} className='btn btn-danger '>Delete</button>
+                                                            <button data-bs-dismiss="modal" className='btn btn-outline-danger text-danger'>Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

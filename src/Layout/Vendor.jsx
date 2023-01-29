@@ -8,8 +8,7 @@ import { useEffect, useContext } from 'react';
 
 function Vendor({ LogOut }) {
   let { isOpen } = useContext(VendersContext);
-  console.log(isOpen);
-
+  
   useEffect(() => {
 
   }, [isOpen])

@@ -1,115 +1,135 @@
-import React, { useRef, useState,useEffect } from 'react'
-import { Modal, Table, Form } from 'react-bootstrap'
-import Component from '../../../constants/Component'
+import React, {  useState, useEffect, useContext } from 'react'
+import { Form } from 'react-bootstrap' 
 import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-import { useCallback } from 'react'
-const UpdateUser = ({ show, handleClose, Userdata }) => {
-    let { IDUser, UserEmail, UserName, UserPhone } = Userdata;
-    // console.log(data);
+import 'react-phone-input-2/lib/style.css' 
+import { Toaster } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
+import { VendersContext } from './../../../Api/context/VenderStore';
+import { PostData, apiheader } from './../../../Api/hook/fetchData';
 
-    // const [email, setEmail] = useState(UserEmail);
-    // const [uername, setuername] = useState(UserName);
-    // const [Phone, setUserPhone] = useState(UserPhone);
+const UpdateUser = ({ show, handleClose, update }) => {
+    let { getUsers } = useContext(VendersContext)
+    let { IDUser, UserEmail, UserName, UserPhone } = update;
 
     const [data, setData] = useState('');
+    const [emails, setEmail] = useState('');
+    const [firstName, setFirst] = useState('');
+    const [lastName, setLast] = useState('');
+    const [Phone, setUserPhone] = useState('');
 
-
-    const firstname = useRef();
-    const lastname = useRef();
-    const email = useRef();
-    const password = useRef();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState('');
 
     const onChangeHandler = (phone, country, e) => {
         setPhoneNumber(phone)
         setCountry(country.dialCode)
-        console.log(phone);
-        console.log(country);
     }
-    const submit =useCallback (async(e) => {
+
+
+    const submit = ((e) => {
         e.preventDefault()
-        // handle form submission logic here
-       setData({
+        setData({
             'IDUser': IDUser,
-            'UserEmail': email.current.value,
-            // 'UserPassword': password.current.value,
+            'UserEmail': emails,
             'UserPhone': '+' + phoneNumber,
             'UserPhoneFlag': '+' + Country,
-            'UserName': firstname.current.value + ' ' + lastname.current.value,
+            'UserName': firstName + ' ' + lastName,
         })
-        console.log(data);  
-      },[data,phoneNumber,Country]);
-    // const submit = e => {
+        console.log(data);
+        updateSubuser()
+    });
+
+    async function updateSubuser() {
+        let resp = await PostData(`${process.env.REACT_APP_BASE_URL}vendor/profile/update`, data, apiheader).then((res) => {
+            getUsers()
+            console.log(res.data.ApiMsgEn);
+            toast.success(res.data.ApiMsgEn);
+
+        }).catch((err) => {
+            console.log(err);
+            toast.success(err.data.ApiMsgEn);
+        });
+        console.log(resp.data);
+    }
+
+
+    useEffect(() => { 
+        setEmail(UserEmail);
+        setFirst(UserName?.split(' ')[0]);
+        setUserPhone(UserPhone);
+        setLast(UserName?.split(' ')[1])
+        setUserPhone(UserPhone)
+        console.log(data);
         
-              //   get().then((res) => {
-        // console.log(res);
-        //   }).catch((err) => {
-        // console.log(err);
-        //   })]
-    // }
-
-    // async function get() {
-    //   let resp = await axios.post(`https://zariexpress.com/api/vendor/profile/update`, data, {
-    //     headers: {
-    //       'Authorization': 'Bearer ' + localStorage.getItem('token'),
-    //     }
-    //   }); 
-    // }
-
-    useEffect(() => {
-        // submit()
-    }, [])
-    
-
+    }, [update, data])
 
 
     return (
         <>
-            <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
-                <Modal.Title className=' w-100 text-center' >Update user</Modal.Title>
-            </Modal.Header>
 
-            <Modal.Body>
 
+            <div className="modal-header ">
+                <h1 className="modal-title fs-5  w-100 text-center" id="staticBackdropLabel">Update user</h1>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="model-body   px-3">
                 <form onSubmit={submit}>
-                    <Form.Group controlId="formBasicEmail">
+                    <Form.Group controlId="formBasicEmail" className='d-flex flex-column justify-content-end align-items-start '>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" name='firstname' ref={firstname} />
+                        <Form.Control type="text" name='firstname' value={firstName} onChange={event => setFirst(event.target.value)} />
                     </Form.Group>
-                    <Form.Group controlId="formBasicEmail" className='mt-2' >
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" name='lastname' ref={lastname} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name='email' ref={email} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail" className="mt-2">
-                        <Form.Label>Mobile</Form.Label>
 
+                    <Form.Group controlId="formBasicEmail" className='mt-2 d-flex flex-column justify-content-end align-items-start ' >
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control type="text" name='lastname' value={lastName} onChange={event => setLast(event.target.value)} />
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicEmail" className="mt-2 d-flex flex-column justify-content-end align-items-start ">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" name='email' value={emails} onChange={event => setEmail(event.target.value)} />
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicEmail" className="mt-2 d-flex flex-column justify-content-end align-items-start ">
+                        <Form.Label>Mobile</Form.Label>
                         <PhoneInput
                             country='eg'
                             // onlyCountries={['eg', 'sa']} 
+                            dropdownClass='d-flex flex-column  align-items-start overflow-hidden     '
                             preferredCountries={['eg', 'sa']}
-                            value={phoneNumber}
+                            searchClass='w-100  '
+                            value={Phone}
                             onChange={onChangeHandler}
                             enableSearch
                             searchPlaceholder="Country number..."
-                            containerClass="ease-linear duration-150 p-1 placeholder-gray-400 text-gray-700 w-100  rounded text-sm  focus:outline-none focus:shadow-outline w-full"
+                            containerClass=" ease-linear duration-150 p-1 placeholder-gray-400 text-gray-700 w-100  rounded text-sm  focus:outline-none focus:shadow-outline w-full"
                             inputStyle={{ border: 'none' }}
                             buttonStyle={{ border: 'none' }}
-                            buttonClass="rounded "
+                            buttonClass="rounded  bg-white "
+                            inputClass='w-100 px-5'
                         />
                     </Form.Group>
-                    {/* <button type="submit">submit</button> */}
-            <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-                 <Component.ButtonBase title={"Add Sub User"} bg={"danger"} /> 
-            </Modal.Footer>
+                    <div className="modal-footer d-flex justify-content-center align-item-center  ">
+                        <button data-bs-dismiss="modal" className='btn btn-danger '>Update Password</button>
+                    </div>
                 </form>
-            </Modal.Body>
-
+            </div>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{
+                    duration: 3000,
+                    style: {
+                        fontFamily: ' Arial, Helvetica, sans-serif',
+                        textTransform: 'capitalize',
+                        zIndex: '9999',
+                        background: '#fff',
+                        color: '#000',
+                    },
+                }}
+                containerStyle={{
+                    top: 60
+                }}
+            />
         </>
     )
 }
