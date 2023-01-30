@@ -6,12 +6,14 @@ import { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
 import VenderContext from './Api/context/VenderStore';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 function App() {
-  // const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   // function userDecode() {
   //   let Incode = localStorage.getItem('token');
   //   let decode = jwtDecode(Incode)
+  //   console.log(decode);
   //   setUserData(decode)
   // }
   // useEffect(() => {
@@ -27,7 +29,9 @@ function App() {
     }
   }
   function LogOut() {
-    localStorage.removeItem('token')
+    setInterval(() => {
+      localStorage.removeItem('token')
+    }, 2000);
     // setUserData(null)
     return <Navigate to="/auth/login" replace={true} />
   }

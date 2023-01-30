@@ -90,12 +90,14 @@
         font-weight: 500;
         font-size: 18px;
         line-height: 27px;
-        /* identical to box height */
 
-        text-align: center;
-
-        /* Dark Gray */
+        text-align: center; 
 
         color: #4A4A4A; 
     }
+}
+
+.css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+    background-color: rgba($color: $colorRed-0, $alpha: 0.9) !important;
+    color: $colorLight !important;
 }

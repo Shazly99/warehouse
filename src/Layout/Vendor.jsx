@@ -30,7 +30,7 @@ function Vendor({ LogOut }) {
           >
             <main className='  m-0 p-0'  >
               <Component.Navber />
-              <div>
+              <div> 
                 <Outlet></Outlet>
               </div>
             </main>

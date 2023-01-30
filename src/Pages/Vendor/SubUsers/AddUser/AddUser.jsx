@@ -9,6 +9,7 @@ import { Form } from 'react-bootstrap';
 import { useRef } from 'react';
 import Icons from '../../../../constants/Icons';
 import { PostData, apiheader } from './../../../../Api/hook/fetchData';
+import { toast } from 'react-hot-toast';
 
 const AddUser = () => {
     const [data, setData] = useState({});
@@ -34,19 +35,14 @@ const AddUser = () => {
             'UserPhoneFlag': '+' + Country,
             'UserName': firstname.current.value + ' ' + lastname.current.value,
         })
-
-        get().then((res) => {
-
-        }).catch((err) => {
-
-        })
+        addNewUser()
     }
-    async function get() {
-        let resp = await PostData(`https://zariexpress.com/api/vendor/users/add`, data, apiheader)
+    async function addNewUser() {
+        return await PostData(`${process.env.REACT_APP_BASE_URL}vendor/users/add`, data, apiheader);
     }
 
     useEffect(() => {
-        get();
+        addNewUser();
     }, [data, phoneNumber])
 
     return (

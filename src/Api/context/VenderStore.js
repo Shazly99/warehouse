@@ -13,24 +13,24 @@ function VenderContext({ children }) {
 
   const [user, setUser] = useState([])
   const [PagesNumber, setPagesNumber] = useState('')
-
+ 
   // get users list
   async function getUsers(pageNumber) {
-    let resp = await PostData(`${process.env.REACT_APP_BASE_URL}vendor/users`, {IDPage:pageNumber}, apiheader);
+    let resp = await PostData(`${process.env.REACT_APP_BASE_URL}vendor/users`, { IDPage: pageNumber }, apiheader);
     setUser(resp.data.Response);
-    setPagesNumber(resp.data.PagesNumber); 
-  } 
+    setPagesNumber(resp.data.PagesNumber);
+  }
 
   // get delete users from list
-  async function deleteUser(item) { 
-    return await GetData(`${process.env.REACT_APP_BASE_URL}vendor/users/delete/${item}`, apiheader).then((res) => { 
+  async function deleteUser(item) {
+    return await GetData(`${process.env.REACT_APP_BASE_URL}vendor/users/delete/${item}`, apiheader).then((res) => {
       toast.success(res.ApiMsgEn);
       getUsers()
     }).catch(err => {
       toast.success(err.ApiMsgEn);
     })
   }
- 
+
 
   useEffect(() => {
     getUsers(1);
@@ -57,7 +57,7 @@ function VenderContext({ children }) {
         }}
       />
 
-      <VendersContext.Provider value={{ user, isOpen, toggle, deleteUser ,getUsers,PagesNumber}}>
+      <VendersContext.Provider value={{ user, isOpen, toggle, deleteUser, getUsers, PagesNumber }}>
         {children}
       </VendersContext.Provider>
     </>
